@@ -1,1 +1,2 @@
 create table student(usn varchar(10) primary key,name varchar(30),phoneno integer,branch varchar(30));
+insert into student values('4MT18CS116 ','yashwitha',980,'COMPUTER SCIENCE ');
