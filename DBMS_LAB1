@@ -3,3 +3,4 @@ insert into student values('4MT18CS116 ','yashwitha',980,'COMPUTER SCIENCE ');
 insert into student values('4MT18CS090 ','shraddha shetty',940,'COMPUTER SCIENCE ');
 insert into student values('4MT18IS052 ','Sanvi',280,'INFORMATION  SCIENCE ');
 insert into student values('4MT18ME078 ','sharvi',780,'MECHANICAL ENGINEERING ');
+insert into student values('4MT18EC076 ','shivani',980,'ELECTRONICS AND COMMUNICATION '); 
