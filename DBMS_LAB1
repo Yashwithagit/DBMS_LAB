@@ -1,0 +1,1 @@
+create table student(usn varchar(10) primary key,name varchar(30),phoneno integer,branch varchar(30));
