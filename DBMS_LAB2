@@ -1,0 +1,30 @@
+**Schema (MySQL v5.7)**
+
+    create table BOOK(Book_id integer primary key,Title varchar(40),Publisher_Name varchar(30),Pub_Year integer);
+    insert into BOOK values(123,'DBMS','AAA',2012);
+    insert into BOOK values(152,'MS','ABA',1912);
+    insert into BOOK values(189,'SE','BBA',1812);
+    insert into BOOK values(173,'ME','ZZA',2012);
+    insert into BOOK values(192,'DBMS','XXAA',2002);
+    insert into BOOK values(187,'ME','BBA',1992);
+    
+    
+
+---
+
+**Query #1**
+
+    select * from BOOK ;
+
+| Book_id | Title | Publisher_Name | Pub_Year |
+| ------- | ----- | -------------- | -------- |
+| 123     | DBMS  | AAA            | 2012     |
+| 152     | MS    | ABA            | 1912     |
+| 173     | ME    | ZZA            | 2012     |
+| 187     | ME    | BBA            | 1992     |
+| 189     | SE    | BBA            | 1812     |
+| 192     | DBMS  | XXAA           | 2002     |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/nDCYVmNkeZrLocc1dia2JX/1)
