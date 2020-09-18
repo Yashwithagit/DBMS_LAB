@@ -82,3 +82,23 @@ select Book_id=123 from BOOK ;
 | 123     | DBMS  | AAA            | 2012     |
 
 
+
+lab1:
+
+
+
+
+    create table publisher(name varchar(30),address varchar(40),phno integer, primary key(name));
+                                                                         
+    create table book(book_id integer, title varchar(40),publisher_name varchar(40),pub_year integer,primary key(book_id),foreign key(publisher_name) references publisher(name));
+    
+    create table book_authors(book_id integer,author_name varchar(40),foreign key(book_id) references book(book_id));
+    
+    create table library_branch(branch_id integer,branch_name varchar(40),address varchar(40),primary key(branch_id));                                                                                                       
+    create table book_copies(book_id integer,branch_id integer,no_of_copies integer,foreign key(book_id) references book(book_id),foreign key(branch_id) references library_branch(branch_id));    
+    create table book_lending(book_id integer,branch_id integer,card_no integer,date_out integer,date_due integer,foreign key(branch_id) references library_branch(branch_id),foreign key(book_id) references book(book_id),primary key(card_no));
+
+---
+
+
+
