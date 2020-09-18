@@ -1,0 +1,1 @@
+create table publisher(name varchar(30),address varchar(40),phno integer, primary key(name));
