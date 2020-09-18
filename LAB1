@@ -1,1 +1,2 @@
 create table publisher(name varchar(30),address varchar(40),phno integer, primary key(name));
+create table book(book_id integer, title varchar(40),publisher_name varchar(40),pub_year integer,primary key(book_id),foreign key(publisher_name) references publisher(name));
