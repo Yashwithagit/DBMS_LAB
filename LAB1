@@ -4,3 +4,8 @@ create table book_authors(book_id integer,author_name varchar(40),foreign key(bo
 create table library_branch(branch_id integer,branch_name varchar(40),address varchar(40),primary key(branch_id));                                                                                                       
 create table book_copies(book_id integer,branch_id integer,no_of_copies integer,foreign key(book_id) references book(book_id),foreign key(branch_id) references library_branch(branch_id));                                                                                     
 create table book_lending(book_id integer,branch_id integer,card_no integer,date_out integer,date_due integer,foreign key(branch_id) references library_branch(branch_id),foreign key(book_id) references book(book_id),primary key(card_no));
+insert into publisher values('Mcgrew','Bangalore',969650001);
+insert into publisher values('Person','Bangalore',959595000);
+insert into publisher values('SAM Pub','Mangalore',949494000);
+insert into publisher values('IUP','Mumbai',979797000);
+insert into publisher values('IEE','Delhi',909090000);
