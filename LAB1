@@ -14,3 +14,8 @@ insert into book values(20,'SE','Person',2008);
 insert into book values(30,'FLAT','SAM Pub',2019);
 insert into book values(40,'BDA','IUP',2018);
 insert into book values(50,'MP','IEE',2020);
+insert into book_authors values(10,'Andrew');
+insert into book_authors values(20,'Raj Kumar');
+insert into book_authors values(30,'Samual');
+insert into book_authors values(40,'Padma');
+insert into book_authors values(50,'Guru');
