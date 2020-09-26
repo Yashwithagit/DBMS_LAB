@@ -9,3 +9,8 @@ insert into publisher values('Person','Bangalore',959595000);
 insert into publisher values('SAM Pub','Mangalore',949494000);
 insert into publisher values('IUP','Mumbai',979797000);
 insert into publisher values('IEE','Delhi',909090000);
+insert into book values(10,'DBMS','Mcgrew',2010);
+insert into book values(20,'SE','Person',2008);
+insert into book values(30,'FLAT','SAM Pub',2019);
+insert into book values(40,'BDA','IUP',2018);
+insert into book values(50,'MP','IEE',2020);
