@@ -102,3 +102,71 @@ lab1:
 
 
 
+
+
+
+**Schema (MySQL v5.7)**
+
+    create table student(ssn integer,name varchar(30),major varchar(30),bdate integer,primary key(ssn));
+    create table COURSE(course_id integer,cname varchar(30),dpet varchar(30),primary key(course_id)); 
+    create table text(book_isbn integer,book_title varchar(30),publisher varchar(30),author varchar(30),primary key(book_isbn));                           
+            
+    create table  book_adoption(course_id integer,quarter integer,book_isbn integer,primary key(quarter),foreign key(course_id) references COURSE(course_id));                                                     
+    create table  enroll(ssn integer,course_id integer,quarter integer,grade varchar(30),foreign key(ssn) references student(ssn),foreign key(course_id) references  COURSE(course_id),foreign key(quarter) references book_adoption(quarter));                
+    insert into student values(10,'Shanvi','female',2020-12-20);
+    insert into COURSE values(100,'dbms','xx');
+    insert into text values(1234,100,2,'aaa');
+    insert into book_adoption values(100,3,1234);
+    insert into enroll values(10,100,3,'A');
+
+---
+
+**Query #1**
+
+    select * from student;
+
+| ssn | name   | major  | bdate |
+| --- | ------ | ------ | ----- |
+| 10  | Shanvi | female | 1988  |
+
+---
+**Query #2**
+
+    select * from COURSE;
+
+| course_id | cname | dpet |
+| --------- | ----- | ---- |
+| 100       | dbms  | xx   |
+
+---
+**Query #3**
+
+    select * from text;
+
+| book_isbn | book_title | publisher | author |
+| --------- | ---------- | --------- | ------ |
+| 1234      | 100        | 2         | aaa    |
+
+---
+**Query #4**
+
+    select * from book_adoption;
+
+| course_id | quarter | book_isbn |
+| --------- | ------- | --------- |
+| 100       | 3       | 1234      |
+
+---
+**Query #5**
+
+    select * from enroll;
+
+| ssn | course_id | quarter | grade |
+| --- | --------- | ------- | ----- |
+| 10  | 100       | 3       | A     |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/)
+
+
