@@ -1,0 +1,32 @@
+4/12/2020
+**Schema (MySQL v5.7)**
+
+    CREATE TABLE ACTOR(
+      Act_id integer,
+      Act_Name varchar(90),
+      Act_Gender varchar(20),
+      primary key(Act_id));
+    CREATE TABLE DIRECTOR(
+       Dir_id integer,
+       Dir_Name varchar(50),
+       Dir_Phone varchar(10),
+       primary key(Dir_id));
+    CREATE TABLE MOVIES(
+       Mov_id integer,
+      Mov_Title varchar(40),
+      Mov_Year integer,
+      Mov_lang varchar(40),
+      Dir_id integer,
+      primary key(Mov_id),
+      foreign key(Dir_id) references DIRECTOR(Dir_id) on delete cascade);
+    CREATE TABLE MOVIE_CAST(
+      Act_id integer,
+      Mov_id integer,
+      Role varchar(90),
+      foreign key(Act_id) references ACTOR(Act_id) on delete cascade,foreign key(Mov_id) references MOVIES(Mov_id) on delete cascade);
+    CREATE TABLE RATING(
+      Mov_id integer,
+      Rev_Stars integer,
+      foreign key(Mov_id) references MOVIES(Mov_id) on delete cascade);
+
+---
