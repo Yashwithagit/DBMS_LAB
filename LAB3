@@ -161,3 +161,140 @@
 
 
 [View on DB Fiddle](https://www.db-fiddle.com/)
+
+
+11/122/2020
+**Schema (MySQL v5.7)**
+
+    
+            CREATE TABLE ACTOR(
+              Act_id integer,
+              Act_Name varchar(90),
+              Act_Gender varchar(20),
+              primary key(Act_id));
+            CREATE TABLE DIRECTOR(
+               Dir_id integer,
+               Dir_Name varchar(50),
+               Dir_Phone varchar(10),
+               primary key(Dir_id));
+            CREATE TABLE MOVIES(
+               Mov_id integer,
+              Mov_Title varchar(40),
+              Mov_Year integer,
+              Mov_lang varchar(40),
+              Dir_id integer,
+              primary key(Mov_id),
+              foreign key(Dir_id) references DIRECTOR(Dir_id) on delete cascade);
+            CREATE TABLE MOVIE_CAST(
+              Act_id integer,
+              Mov_id integer,
+              Role varchar(90),
+              foreign key(Act_id) references ACTOR(Act_id) on delete cascade,foreign key(Mov_id) references MOVIES(Mov_id) on delete cascade);
+            CREATE TABLE RATING(
+              Mov_id integer,
+              Rev_Stars integer,
+              foreign key(Mov_id) references MOVIES(Mov_id) on delete cascade);
+                           
+         INSERT INTO ACTOR VALUES (301,'ANUSHKA','F');
+        INSERT INTO ACTOR VALUES (302,'PRABHAS','M');
+        INSERT INTO ACTOR VALUES (303,'PUNITH','M');
+        INSERT INTO ACTOR VALUES (304,'JERMY','M');
+        INSERT INTO DIRECTOR VALUES (60,'RAJAMOULI', 8751611001);
+        INSERT INTO DIRECTOR VALUES (61,'Hitchcock', 7766138911);
+        INSERT INTO DIRECTOR VALUES (62,'FARAN', 9986776531);
+        INSERT INTO DIRECTOR VALUES (63,'STEVEN SPIELBERG', 8989776530);
+        INSERT INTO MOVIES VALUES (1001,'BAHUBALI-2', 2017, 'TELAGU', 60);
+        INSERT INTO MOVIES VALUES (1002,'BAHUBALI-1', 2015, 'TELAGU', 60);
+        INSERT INTO MOVIES VALUES (1003,'AKASH', 2008, 'KANNADA', 61); INSERT INTO MOVIES VALUES (1004,'WAR HORSE', 2011, 'ENGLISH', 63);
+        INSERT INTO MOVIE_CAST VALUES (301, 1002, 'HEROINE'); 
+        INSERT INTO MOVIE_CAST VALUES (301, 1001, 'HEROINE'); 
+        INSERT INTO MOVIE_CAST VALUES (303, 1003, 'HERO'); 
+        INSERT INTO MOVIE_CAST VALUES (303, 1002, 'GUEST'); 
+        INSERT INTO MOVIE_CAST VALUES (304, 1004, 'HERO');
+        INSERT INTO RATING VALUES (1001,4);
+        INSERT INTO RATING VALUES (1002,2);
+        INSERT INTO RATING VALUES (1003, 5);
+        INSERT INTO RATING VALUES (1004, 4);
+        
+
+---
+
+**Query #1**
+
+    select * from ACTOR;
+
+| Act_id | Act_Name | Act_Gender |
+| ------ | -------- | ---------- |
+| 301    | ANUSHKA  | F          |
+| 302    | PRABHAS  | M          |
+| 303    | PUNITH   | M          |
+| 304    | JERMY    | M          |
+
+---
+**Query #2**
+
+    SELECT * FROM DIRECTOR;
+
+| Dir_id | Dir_Name         | Dir_Phone  |
+| ------ | ---------------- | ---------- |
+| 60     | RAJAMOULI        | 8751611001 |
+| 61     | Hitchcock        | 7766138911 |
+| 62     | FARAN            | 9986776531 |
+| 63     | STEVEN SPIELBERG | 8989776530 |
+
+---
+**Query #3**
+
+    SELECT * FROM MOVIES;
+
+| Mov_id | Mov_Title  | Mov_Year | Mov_lang | Dir_id |
+| ------ | ---------- | -------- | -------- | ------ |
+| 1001   | BAHUBALI-2 | 2017     | TELAGU   | 60     |
+| 1002   | BAHUBALI-1 | 2015     | TELAGU   | 60     |
+| 1003   | AKASH      | 2008     | KANNADA  | 61     |
+| 1004   | WAR HORSE  | 2011     | ENGLISH  | 63     |
+
+---
+**Query #4**
+
+    SELECT * FROM MOVIE_CAST;
+
+| Act_id | Mov_id | Role    |
+| ------ | ------ | ------- |
+| 301    | 1002   | HEROINE |
+| 301    | 1001   | HEROINE |
+| 303    | 1003   | HERO    |
+| 303    | 1002   | GUEST   |
+| 304    | 1004   | HERO    |
+
+---
+**Query #5**
+
+    SELECT *FROM RATING;
+
+| Mov_id | Rev_Stars |
+| ------ | --------- |
+| 1001   | 4         |
+| 1002   | 2         |
+| 1003   | 5         |
+| 1004   | 4         |
+
+---
+**Query #6**
+
+    select  DISTINCT MOV_TITLE
+    from MOVIES M, MOVIE_CAST MC
+    where M.Mov_id=MC.Mov_id and Act_id in 
+    (select Act_id
+    from MOVIE_CAST group by ACT_ID having
+    count (*)>1)
+    group by Mov_Title having
+    count (*)>1;
+
+| MOV_TITLE  |
+| ---------- |
+| BAHUBALI-1 |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/pP9NT2Vtywoh7A5ATDqQyh/0)
