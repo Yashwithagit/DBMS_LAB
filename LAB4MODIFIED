@@ -1,0 +1,231 @@
+**Schema (MySQL v5.7)**
+
+     CREATE TABLE STUDENT(
+              USN varchar(10),
+              SName varchar(30),
+              Address varchar(70),
+              Phone LONG,
+              Gender varchar(40),
+            primary key(USN));
+                        CREATE TABLE SEMSEC(
+               SSID varchar(5) primary key,
+               Sem INTEGER,
+               Sec varchar(2));
+                           CREATE TABLE CLASS(
+               USN VARCHAR(10),
+               SSID VARCHAR(5),
+               FOREIGN KEY(USN) REFERENCES STUDENT(USN),FOREIGN KEY(SSID) REFERENCES SEMSEC(SSID));
+                CREATE TABLE COURSE(
+              Subcode  varchar(8) primary key,
+               Title varchar(40),
+               Sem integer,
+               Credits integer);  
+            create table IAMARKS(
+                USN VARCHAR(10),
+                Subcode varchar(8),
+                SSID VARCHAR(5),
+                Test1 INTEGER,
+                Test2 integer,
+                Test3 integer,
+                FinalIA integer,
+                foreign key (USN) REFERENCES STUDENT(USN),
+                FOREIGN KEY(Subcode) references COURSE(Subcode),
+                foreign key (SSID) REFERENCES SEMSEC(SSID));
+                INSERT INTO STUDENT VALUES ('1bi17cv601','AKSHAY','BELAGAVI',
+            8877881122,'M');
+            INSERT INTO STUDENT VALUES('1bi15ec201','SANDHYA','BENGALURU',
+            7722829912,'F');
+            INSERT INTO STUDENT VALUES('1bi16cs110','TEESHA','BENGALURU',
+            7712312312,'F');
+            INSERT INTO STUDENT VALUES('1bi15cs066','SUPRIYA','MANGALURU',
+            8877881122,'F');
+            INSERT INTO STUDENT VALUES('1bi17cv301','ABHAY','BENGALURU',
+            9900211201,'M');
+            INSERT INTO STUDENT VALUES('1bi18cV401','BHASKAR','BENGALURU',
+            9923211099,'M');
+            
+            INSERT INTO SEMSEC VALUES ('CSE8A', 8,'A');
+            INSERT INTO SEMSEC VALUES ('CSE8B', 8,'B');
+            INSERT INTO SEMSEC VALUES('CSE8C',4,'C');
+            INSERT INTO SEMSEC VALUES ('CSE7A', 7,'A');
+            INSERT INTO SEMSEC VALUES('CSE7B',7,'B');
+            INSERT INTO SEMSEC VALUES ('CSE7C',4,'C');
+           
+           
+            INSERT INTO CLASS VALUES('1bi17cv601','CSE8A');
+            INSERT INTO CLASS VALUES('1bi18cV401','CSE8A');
+            INSERT INTO CLASS VALUES('1bi15cs066','CSE8B');
+            INSERT INTO CLASS VALUES('1bi16cs110','CSE8C');
+            INSERT INTO CLASS VALUES('1bi17cv301','CSE7A');
+            INSERT INTO CLASS VALUES('1bi15ec201','CSE7A');
+           
+           
+            
+            INSERT INTO COURSE  VALUES ('10CS81','ACA', 8, 4);
+            INSERT INTO COURSE  VALUES ('10CS82','SSM', 8, 4);
+            INSERT INTO COURSE  VALUES ('10CS83','NM', 8, 4);
+            INSERT INTO COURSE  VALUES ('10CS84','CC', 8, 4);
+            INSERT INTO COURSE  VALUES ('10CS85','PW', 8, 4);
+            INSERT INTO COURSE  VALUES ('10CS71','OOAD', 7, 4);
+            
+            
+           
+        INSERT INTO IAMARKS VALUES('1bi15ec201','10CS71','CSE8A',25,27,20,24);
+        INSERT INTO IAMARKS VALUES('1bi17cv601','10CS81','CSE8A',26,27,25,25);
+         INSERT INTO IAMARKS VALUES('1bi15cs066','10CS82','CSE8B',25,27,25,27);
+         INSERT INTO IAMARKS VALUES('1bi16cs110','10CS83','CSE8C',25,27,29,28);
+         INSERT INTO IAMARKS VALUES('1bi18cV401','10CS84','CSE7A',29,27,20,24);
+         INSERT INTO IAMARKS VALUES('1bi17cv301','10CS85','CSE7A',20,20,29,20);
+                                                                                                                                                                                                                                                                            
+        
+        
+    
+
+---
+
+**Query #1**
+
+    SELECT * FROM STUDENT;
+
+| USN        | SName   | Address   | Phone      | Gender |
+| ---------- | ------- | --------- | ---------- | ------ |
+| 1bi15cs066 | SUPRIYA | MANGALURU | 8877881122 | F      |
+| 1bi15ec201 | SANDHYA | BENGALURU | 7722829912 | F      |
+| 1bi16cs110 | TEESHA  | BENGALURU | 7712312312 | F      |
+| 1bi17cv301 | ABHAY   | BENGALURU | 9900211201 | M      |
+| 1bi17cv601 | AKSHAY  | BELAGAVI  | 8877881122 | M      |
+| 1bi18cV401 | BHASKAR | BENGALURU | 9923211099 | M      |
+
+---
+**Query #2**
+
+    SELECT * FROM SEMSEC;
+
+| SSID  | Sem | Sec |
+| ----- | --- | --- |
+| CSE7A | 7   | A   |
+| CSE7B | 7   | B   |
+| CSE7C | 4   | C   |
+| CSE8A | 8   | A   |
+| CSE8B | 8   | B   |
+| CSE8C | 4   | C   |
+
+---
+**Query #3**
+
+    SELECT * FROM CLASS;
+
+| USN        | SSID  |
+| ---------- | ----- |
+| 1bi17cv601 | CSE8A |
+| 1bi18cV401 | CSE8A |
+| 1bi15cs066 | CSE8B |
+| 1bi16cs110 | CSE8C |
+| 1bi17cv301 | CSE7A |
+| 1bi15ec201 | CSE7A |
+
+---
+**Query #4**
+
+    SELECT * FROM COURSE;
+
+| Subcode | Title | Sem | Credits |
+| ------- | ----- | --- | ------- |
+| 10CS71  | OOAD  | 7   | 4       |
+| 10CS81  | ACA   | 8   | 4       |
+| 10CS82  | SSM   | 8   | 4       |
+| 10CS83  | NM    | 8   | 4       |
+| 10CS84  | CC    | 8   | 4       |
+| 10CS85  | PW    | 8   | 4       |
+
+---
+**Query #5**
+
+    SELECT * FROM IAMARKS;
+
+| USN        | Subcode | SSID  | Test1 | Test2 | Test3 | FinalIA |
+| ---------- | ------- | ----- | ----- | ----- | ----- | ------- |
+| 1bi15ec201 | 10CS71  | CSE8A | 25    | 27    | 20    | 24      |
+| 1bi17cv601 | 10CS81  | CSE8A | 26    | 27    | 25    | 25      |
+| 1bi15cs066 | 10CS82  | CSE8B | 25    | 27    | 25    | 27      |
+| 1bi16cs110 | 10CS83  | CSE8C | 25    | 27    | 29    | 28      |
+| 1bi18cV401 | 10CS84  | CSE7A | 29    | 27    | 20    | 24      |
+| 1bi17cv301 | 10CS85  | CSE7A | 20    | 20    | 29    | 20      |
+
+---
+**Query #6**
+
+    SELECT * FROM STUDENT S,SEMSEC SS,CLASS C WHERE S.USN=C.USN AND C.SSID=SS.SSID AND Sem=4 and Sec='C';
+
+| USN        | SName  | Address   | Phone      | Gender | SSID  | Sem | Sec | USN        | SSID  |
+| ---------- | ------ | --------- | ---------- | ------ | ----- | --- | --- | ---------- | ----- |
+| 1bi16cs110 | TEESHA | BENGALURU | 7712312312 | F      | CSE8C | 4   | C   | 1bi16cs110 | CSE8C |
+
+---
+**Query #7**
+
+    select Sem,Sec,Gender,count(*)  from STUDENT S,SEMSEC SS,CLASS C
+        WHERE S.USN=C.USN AND C.SSID=SS.SSID
+        GROUP BY Sem,Sec,Gender
+        order by Sem;
+
+| Sem | Sec | Gender | count(*) |
+| --- | --- | ------ | -------- |
+| 4   | C   | F      | 1        |
+| 7   | A   | F      | 1        |
+| 7   | A   | M      | 1        |
+| 8   | A   | M      | 2        |
+| 8   | B   | F      | 1        |
+
+---
+**Query #8**
+
+    create view Test1 as select Subcode ,Test1
+        from  IAMARKS 
+        WHERE USN='1bi15cs101';
+
+There are no results to be displayed.
+
+---
+**Query #9**
+
+    update IAMARKS
+        SET FinalIA=(Test1+Test2+Test3)-least(Test1,Test2,Test3)/2;
+
+There are no results to be displayed.
+
+---
+**Query #10**
+
+    select * from IAMARKS;
+
+| USN        | Subcode | SSID  | Test1 | Test2 | Test3 | FinalIA |
+| ---------- | ------- | ----- | ----- | ----- | ----- | ------- |
+| 1bi15ec201 | 10CS71  | CSE8A | 25    | 27    | 20    | 62      |
+| 1bi17cv601 | 10CS81  | CSE8A | 26    | 27    | 25    | 66      |
+| 1bi15cs066 | 10CS82  | CSE8B | 25    | 27    | 25    | 65      |
+| 1bi16cs110 | 10CS83  | CSE8C | 25    | 27    | 29    | 69      |
+| 1bi18cV401 | 10CS84  | CSE7A | 29    | 27    | 20    | 66      |
+| 1bi17cv301 | 10CS85  | CSE7A | 20    | 20    | 29    | 59      |
+
+---
+**Query #11**
+
+    select S.USN,SName,FinalIA,
+        (CASE
+             WHEN FinalIA>=17 and FinalIA<=20 then 'Outstanding'
+         when FinalIA>=12 and FinalIA<=17 then 'Average'
+         when FinalIA<12 then 'weak'
+         END)CAT
+         FROM STUDENT S,IAMARKS IA,CLASS C,SEMSEC SC
+         WHERE S.USN=IA.USN AND S.USN=C.USN AND C.SSID=SC.SSID and SC.Sem=8 ;
+
+| USN        | SName   | FinalIA | CAT |
+| ---------- | ------- | ------- | --- |
+| 1bi17cv601 | AKSHAY  | 66      |     |
+| 1bi15cs066 | SUPRIYA | 65      |     |
+| 1bi18cV401 | BHASKAR | 66      |     |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/)
