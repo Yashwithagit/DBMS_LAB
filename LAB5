@@ -1,0 +1,38 @@
+create table DEPARTMENT(
+   DNo integer primary key,
+  Dname varchar(30),
+  MgrSSN varchar(20),
+  MgrStartDate Date);
+create table EMPLOYEE(
+  SSN VARCHAR(3) primary key,
+  Name varchar(40),
+  Address varchar(40),
+  Sex varchar(1),
+  Salary integer,
+  SuperSSN varchar(10),
+  DNo integer,
+  foreign key(DNo) references DEPARTMENT(DNo));
+  create table DLOCATION(
+    DNo integer,
+    DLoc VARCHAR(10) primary key,
+    foreign key (DNo) references DEPARTMENT(DNo));
+ create table PROJECT(
+   PNo integer primary key,
+   PName varchar(20),
+   PLocation varchar(50),
+   DNo integer,
+   foreign key(DNo) references DEPARTMENT(DNo));
+                                          create table WORKS_ON(
+  SSN varchar(3),
+  PNo integer,
+  Hours integer,
+  foreign key (SSN) references EMPLOYEE(SSN),
+  FOREIGN KEY (PNo) references PROJECT(PNo));
+ insert into DEPARTMENT VALUES(1,'ACCOUNTS','AB1','2017-01-12');
+                                        INSERT INTO EMPLOYEE VALUES('AB1','SCOTT','MANGALORE','F',50000,'AB4',1);      
+                                       INSERT INTO DLOCATION(1,'MANGALORE');
+                                       INSERT INTO PROJECT(2,'IOT','MANGALORE',1);
+                                       INSERT INTO WORKS_ON('AB1',2,22);
+
+ 
+   
