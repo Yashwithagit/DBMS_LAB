@@ -1,0 +1,99 @@
+**Schema (MySQL v5.7)**
+
+    
+    
+    
+    create table DEPARTMENT(DNo integer, 
+     DName varchar(20),
+     MgrSSN varchar(20),
+     MgrStartDate date,
+     primary key (DNo));
+    
+    create table EMPLOYEE(SSN varchar(20),
+     Name varchar(20),
+     Address varchar(20),
+     Sex varchar(20),
+     Salary integer,
+     SuperSSN varchar(20),
+     DNo integer,
+     primary key (SSN),
+     foreign key (DNo) references DEPARTMENT(DNo));
+                  
+    create table DLOCATION(DNo integer,
+     DLoc varchar(20),
+     primary key (DNo,DLoc),
+    foreign key (DNo) references DEPARTMENT(DNo));
+                                            
+    create table PROJECT(PNo integer,
+     PName varchar(20), 
+     PLocation varchar(20), 
+     DNo integer,
+    primary key (PNo),
+    foreign key (DNo) references DEPARTMENT(DNo));
+                                            
+    create table WORKS_ON(SSN varchar(20), 
+    PNo integer, 
+    Hours integer,
+    primary key (SSN, PNo),
+    foreign key (PNo) references PROJECT(PNo),
+    foreign key (SSN) references EMPLOYEE(SSN));                               
+    
+    insert into DEPARTMENT values(5,'Research',333445555,'1988-05-22');
+    insert into DEPARTMENT values(4,'Accounts',987654321,'1995-01-01');
+    insert into DEPARTMENT values(1,'Headquarters',888665555,'1981-06-19');
+     
+    insert into EMPLOYEE values(123456789,'Scott','xyx','m',20000,333445555,5);
+    insert into EMPLOYEE values (333445555,'JOHN','xyxx','m',8000,888665555,5);
+                                          insert into EMPLOYEE values(123456799,'ALICE','x1yx','F',20400,333445555,5);
+                                          insert into EMPLOYEE values(44444896,'Scott','xyx','m',20000,23345678,5);
+    insert into EMPLOYEE values(233456789,'Scott','xyx','m',20000,44444896,5);
+                                          insert into EMPLOYEE values(245456789,'Scott','xyx','m',20000,44444896,5);
+    
+                                          insert into DLOCATION values(1,'Houston');
+    insert into DLOCATION values(4,'Stafford');
+    insert into DLOCATION values(5,'Bellaire');
+    insert into DLOCATION values(5,'Sugarland');
+    insert into DLOCATION values(5,'Houston');
+    
+    insert into PROJECT values(1,'x','h',5);
+    insert into PROJECT values(2,'iot','s',5);
+    insert into PROJECT values(3,'y','h',5);
+    insert into PROJECT values(10,'z','s',4);
+    insert into PROJECT values(20,'a','h',1);
+                                          insert into  WORKS_ON VALUES(233456789,1,12);
+                                           insert into  WORKS_ON VALUES(333445555,2,8);
+                                           insert into  WORKS_ON VALUES(123456799,3,1);
+                                          insert into  WORKS_ON VALUES(245456789,20,12);
+     
+    
+    
+     insert into  WORKS_ON VALUES(44444896,10,7);
+                                         
+                                           insert into  WORKS_ON VALUES (123456789,10,13);
+                                          
+                                          
+                                          
+    
+
+---
+
+**Query #1**
+
+    SELECT Pno 
+    from EMPLOYEE E,WORKS_ON W
+    WHERE E.SSN=W.SSN AND Name='Scott'
+    union
+    select Pno from EMPLOYEE E,DEPARTMENT D,PROJECT P
+    WHERE E.SSN=D.MgrSSN;
+
+| Pno |
+| --- |
+| 10  |
+| 1   |
+| 20  |
+| 2   |
+| 3   |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/)
